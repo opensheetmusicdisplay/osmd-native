@@ -23,6 +23,10 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
+    "typeRoots": [
+      "node_modules/@types",
+      "node_modules/osmd-types-player",
+    ],
     "verbatimModuleSyntax": true
   }
 }
