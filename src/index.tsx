@@ -3,7 +3,7 @@ import { StyleSheet, type StyleProp, type ViewStyle } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 import { osmd_min_str } from './assets/osmd_min';
-import type { IOSMDOptions } from './assets/OSMDOptions';
+import type { IOSMDOptions } from 'opensheetmusicdisplay';
 import {
   initOSMD,
   loadMusicXML,
