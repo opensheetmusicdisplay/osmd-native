@@ -4,7 +4,6 @@ import { WebView } from 'react-native-webview';
 
 import { osmd_min_str } from './assets/osmd_min';
 import type { IOSMDOptions } from 'opensheetmusicdisplay';
-// import type { IOSMDOptions } from './assets/OSMDOptions';
 import {
   initOSMD,
   loadMusicXML,
