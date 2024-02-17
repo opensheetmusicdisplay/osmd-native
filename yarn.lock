@@ -9703,10 +9703,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"osmd-types-player@git+https://github.com/opensheetmusicdisplay/osmd-types-player.git":
+"osmd-types-player@git+https://github.com/opensheetmusicdisplay/osmd-types-player.git#a48577d3a5caf4dc44874746352b94d5cc4c7ca0":
   version: 1.8.6
-  resolution: "osmd-types-player@https://github.com/opensheetmusicdisplay/osmd-types-player.git#commit=4d323b26be5bb58111a584f08d35a4f0efd7872e"
-  checksum: 64f567480a56d9416528f5754c925f859c7a21584e1a8868e35c02d449f0af7039d1b458a6eb880c3f42e3d8eeef45cb512959d8a8a95645e0dde67d4d3a80a8
+  resolution: "osmd-types-player@https://github.com/opensheetmusicdisplay/osmd-types-player.git#commit=a48577d3a5caf4dc44874746352b94d5cc4c7ca0"
+  checksum: ff9e4e007cbe9c6c6694c1f8f9d1a3534df9982dbf02226c4249e0a8b8d1d77451328f1fff0d1d73f581b6c906cefa6a86f278cfd03802c88060eaf5ed7fad85
   languageName: node
   linkType: hard
 
@@ -10404,7 +10404,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     jest: ^28.1.1
-    osmd-types-player: "git+https://github.com/opensheetmusicdisplay/osmd-types-player.git"
+    osmd-types-player: "git+https://github.com/opensheetmusicdisplay/osmd-types-player.git#a48577d3a5caf4dc44874746352b94d5cc4c7ca0"
     pod-install: ^0.1.0
     prettier: ^2.0.5
     react: 18.2.0
