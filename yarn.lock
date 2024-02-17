@@ -9703,6 +9703,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"osmd-types-player@git+https://github.com/opensheetmusicdisplay/osmd-types-player.git":
+  version: 1.8.6
+  resolution: "osmd-types-player@https://github.com/opensheetmusicdisplay/osmd-types-player.git#commit=4d323b26be5bb58111a584f08d35a4f0efd7872e"
+  checksum: 64f567480a56d9416528f5754c925f859c7a21584e1a8868e35c02d449f0af7039d1b458a6eb880c3f42e3d8eeef45cb512959d8a8a95645e0dde67d4d3a80a8
+  languageName: node
+  linkType: hard
+
 "p-cancelable@npm:^3.0.0":
   version: 3.0.0
   resolution: "p-cancelable@npm:3.0.0"
@@ -10397,6 +10404,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.0.0
     jest: ^28.1.1
+    osmd-types-player: "git+https://github.com/opensheetmusicdisplay/osmd-types-player.git"
     pod-install: ^0.1.0
     prettier: ^2.0.5
     react: 18.2.0

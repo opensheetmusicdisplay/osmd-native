@@ -157,7 +157,6 @@
   },
   "dependencies": {
     "osmd-types-player": "git+https://github.com/opensheetmusicdisplay/osmd-types-player.git",
-    "opensheetmusicdisplay": "file:opensheetmusicdisplay.min.js",
     "react-native-webview": "^13.7.0"
   }
 }

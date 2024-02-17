@@ -1,4 +1,4 @@
-import type { IOSMDOptions } from '../assets/OSMDOptions';
+import type { IOSMDOptions } from 'opensheetmusicdisplay';
 
 /** initializes the OSMD instance within the webview. should only happen once when the webview loads.  */
 export const initOSMD = `
