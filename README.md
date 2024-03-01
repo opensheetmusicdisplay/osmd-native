@@ -17,7 +17,7 @@ Currently supports:
 * [Structure](#structure)
 * [Interface](#interface)
 * [Updating OSMD](#updating-osmd)
-* [Building & Publishing](#building-&-publishing)
+* [Building & Publishing](#building--publishing)
 
 ## Installation
 
