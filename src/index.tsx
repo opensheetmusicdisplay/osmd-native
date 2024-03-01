@@ -1,14 +1,35 @@
-import React, { useEffect, useRef } from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from 'react';
 import { StyleSheet, type StyleProp, type ViewStyle } from 'react-native';
 import { WebView } from 'react-native-webview';
+import type { IOSMDOptions } from 'opensheetmusicdisplay';
 
 import { osmd_min_str } from './assets/osmd_min';
-import type { IOSMDOptions } from 'opensheetmusicdisplay';
 import {
   initOSMD,
   loadMusicXML,
   setOptions,
+  startPlayback,
+  pausePlayback,
+  stopPlayback,
+  setCursorColor,
+  passErrorToRN,
 } from './injection/injection_scripts';
+
+export interface OSMDRef {
+  /** starts audio playback */
+  play: () => void;
+  /** pauses audio playback at the current position */
+  pause: () => void;
+  /** stops audio playback and resets to initial position */
+  stop: () => void;
+  /** sets the osmd cursor color */
+  setCursorColor: (color: string) => void;
+}
 
 export interface OSMDProps {
   /** The music document to render.
@@ -26,12 +47,10 @@ export interface OSMDProps {
   onRender?: () => void;
 }
 
-export function OSMDView({
-  musicXML,
-  options,
-  style,
-  onRender,
-}: OSMDProps): React.ReactElement {
+export const OSMDView = forwardRef<OSMDRef, OSMDProps>(function OSMDView(
+  { musicXML, options, style, onRender }: OSMDProps,
+  ref
+): React.ReactElement {
   const webview = useRef<WebView>(null);
 
   /** Handles messages received from the webview.
@@ -41,7 +60,7 @@ export function OSMDView({
     const data = JSON.parse(message);
 
     // @todo: remove, debug only
-    console.log('reveived from webview:', data);
+    console.log('received from webview:', data);
 
     switch (data.event) {
       /** `onInit` is called when an OSMD instance is created.
@@ -67,6 +86,27 @@ export function OSMDView({
     }
   };
 
+  useImperativeHandle(
+    ref,
+    () => {
+      return {
+        play() {
+          webview.current?.injectJavaScript(startPlayback);
+        },
+        pause() {
+          webview.current?.injectJavaScript(pausePlayback);
+        },
+        stop() {
+          webview.current?.injectJavaScript(stopPlayback);
+        },
+        setCursorColor(color) {
+          webview.current?.injectJavaScript(setCursorColor(color));
+        },
+      };
+    },
+    []
+  );
+
   /** Any time options or musicXML changes, we re-inject the new js */
   useEffect(() => {
     if (options) {
@@ -78,6 +118,7 @@ export function OSMDView({
   return (
     <WebView
       ref={webview}
+      injectedJavaScriptBeforeContentLoaded={passErrorToRN}
       injectedJavaScript={osmd_min_str}
       source={{
         html: '<body><div id="osmdContainer"/></div></body>',
@@ -95,7 +136,7 @@ export function OSMDView({
       }}
     />
   );
-}
+});
 
 const styles = StyleSheet.create({
   container: { width: '100%', height: '100%' },
