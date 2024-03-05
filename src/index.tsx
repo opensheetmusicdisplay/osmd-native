@@ -124,6 +124,10 @@ export const OSMDView = forwardRef<OSMDRef, OSMDProps>(function OSMDView(
         html: '<body><div id="osmdContainer"/></div></body>',
       }}
       containerStyle={style ?? styles.container}
+      onShouldStartLoadWithRequest={() => {
+        /** stop any navigation attempt inside the webview - we only load our own html canvas */
+        return false;
+      }}
       onLoad={() => {
         webview.current?.injectJavaScript(initOSMD);
       }}
