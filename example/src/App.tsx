@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import { type OSMDRef, OSMDView } from 'react-native-osmd';
-// import base64 from 'react-native-base64';
+import base64 from 'react-native-base64';
 
 import { beethoven_geliebte } from '../assets/beethoven_geliebte';
 // import { singsing } from '../assets/singsing';
@@ -18,7 +18,7 @@ import { abide } from '../assets/abide';
 const sheets = [
   { title: 'An die ferne Geliebte', content: beethoven_geliebte },
   { title: 'Silent Night', content: silent_night },
-  { title: 'Abide (MXL)', content: abide },
+  { title: 'Abide (MXL)', content: base64.decode(abide) },
 ];
 
 const cursors = [
