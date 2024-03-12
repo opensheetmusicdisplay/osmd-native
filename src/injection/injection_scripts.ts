@@ -14,6 +14,13 @@ export const initOSMD = `
 var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay('osmdContainer');
 osmd.autoResizeEnabled = false;
 window.ReactNativeWebView.postMessage(JSON.stringify({ event: 'onInit', version: osmd.version }));
+window.ReactNativeWebView.postMessage(JSON.stringify({ event: 'ReactNativeWebview', ReactNativeWebView }));
+window.gestureChange = function (event) {
+  window.ReactNativeWebView.postMessage(JSON.stringify({ event: 'gestureChange', event }));
+};
+window.onresize = function (event) {
+  window.ReactNativeWebView.postMessage(JSON.stringify({ event: 'onresize', event }));
+};
 osmd.initPlaybackManager = function () {
   var timingSource = new opensheetmusicdisplay.LinearTimingSource();
   var playbackManager = new opensheetmusicdisplay.PlaybackManager(timingSource, undefined, new opensheetmusicdisplay.BasicAudioPlayer(), undefined);
@@ -68,10 +75,17 @@ osmd.PlaybackManager.reset();
 `;
 
 export const setCursorColor = (color: string) => `
+osmd.cursor.CursorOptions.color = ${JSON.stringify(color)};
+osmd.cursor.update();
 window.ReactNativeWebView.postMessage(JSON.stringify({ event: 'setCursorColor', color: ${JSON.stringify(
   color
 )} })); 
-osmd.cursor.CursorOptions.color = ${JSON.stringify(color)};
-osmd.cursor.update();
-window.ReactNativeWebView.postMessage(JSON.stringify({ event: 'osmd instance cursor', color: osmd.cursor.CursorOptions.color })); 
+`;
+
+export const setZoom = (zoom: Number) => `
+osmd.Zoom = ${JSON.stringify(zoom)};
+osmd.render();
+window.ReactNativeWebView.postMessage(JSON.stringify({ event: 'setZoom', zoom: ${JSON.stringify(
+  zoom
+)} })); 
 `;
