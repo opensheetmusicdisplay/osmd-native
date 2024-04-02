@@ -1,16 +1,6 @@
-import React, {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-} from 'react';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import { StyleSheet, type StyleProp, type ViewStyle } from 'react-native';
 import { WebView } from 'react-native-webview';
-import {
-  GestureHandlerRootView,
-  GestureDetector,
-  Gesture,
-} from 'react-native-gesture-handler';
 import type { IOSMDOptions } from 'opensheetmusicdisplay';
 
 import { osmd_min_str } from './assets/osmd_min';
@@ -35,6 +25,8 @@ export interface OSMDRef {
   stop: () => void;
   /** sets the osmd cursor color */
   setCursorColor: (color: string) => void;
+  /** sets the zoom scale */
+  setZoom: (scale: number) => void;
 }
 
 export interface OSMDProps {
@@ -58,19 +50,7 @@ export const OSMDView = forwardRef<OSMDRef, OSMDProps>(function OSMDView(
   ref
 ): React.ReactElement {
   const webview = useRef<WebView>(null);
-
-  /** Handles pinch to zoom gesture
-   *  we limit the update frequency so osmd has some time to render
-   */
-  const lastUpdateTime = useRef(Date.now());
-  const pinch = Gesture.Pinch().onUpdate((event) => {
-    const now = Date.now();
-    const updateTime = now - lastUpdateTime.current;
-    if (updateTime > 160) {
-      webview.current?.injectJavaScript(setZoom(event.scale));
-      lastUpdateTime.current = now;
-    }
-  });
+  const initialized = useRef(false);
 
   /** Handles messages received from the webview.
    *  @param message a stringified JSON object (see injection scripts for how they are triggered)
@@ -79,7 +59,7 @@ export const OSMDView = forwardRef<OSMDRef, OSMDProps>(function OSMDView(
     const data = JSON.parse(message);
 
     // @todo: remove, debug only
-    console.log('received from webview:', data);
+    // console.log('received from webview:', data, message);
 
     switch (data.event) {
       /** `onInit` is called when an OSMD instance is created.
@@ -87,12 +67,13 @@ export const OSMDView = forwardRef<OSMDRef, OSMDProps>(function OSMDView(
        */
       case 'onInit': {
         console.log(`OSMD Version: ${data.version}`);
-
-        let js = ``;
-        if (options) js += setOptions(options);
-        js += loadMusicXML(musicXML);
-        webview.current?.injectJavaScript(js);
-
+        if (initialized.current === false) {
+          initialized.current = true;
+          let js = ``;
+          if (options) js += setOptions(options);
+          js += loadMusicXML(musicXML);
+          webview.current?.injectJavaScript(js);
+        }
         break;
       }
       /** `onRender` is called when the music sheet is rendered.
@@ -121,48 +102,39 @@ export const OSMDView = forwardRef<OSMDRef, OSMDProps>(function OSMDView(
         setCursorColor(color) {
           webview.current?.injectJavaScript(setCursorColor(color));
         },
+        setZoom(scale) {
+          webview.current?.injectJavaScript(setZoom(scale));
+        },
       };
     },
     []
   );
 
-  /** Any time options or musicXML changes, we re-inject the new js */
-  useEffect(() => {
-    if (options) {
-      webview.current?.injectJavaScript(setOptions(options));
-    }
-    webview.current?.injectJavaScript(loadMusicXML(musicXML));
-  }, [options, musicXML]);
-
   return (
-    <GestureHandlerRootView style={styles.rootView}>
-      <GestureDetector gesture={pinch}>
-        <WebView
-          ref={webview}
-          injectedJavaScriptBeforeContentLoaded={passErrorToRN}
-          injectedJavaScript={osmd_min_str}
-          setBuiltInZoomControls={false}
-          source={{
-            html: '<body><div id="osmdContainer"/></div></body>',
-          }}
-          containerStyle={style ?? styles.container}
-          onShouldStartLoadWithRequest={() => {
-            /** stop any navigation attempt inside the webview - we only load our own html canvas */
-            return false;
-          }}
-          onLoad={() => {
-            webview.current?.injectJavaScript(initOSMD);
-          }}
-          onError={(syntheticEvent) => {
-            const { nativeEvent } = syntheticEvent;
-            throw nativeEvent;
-          }}
-          onMessage={(event) => {
-            handleMessage(event.nativeEvent.data);
-          }}
-        />
-      </GestureDetector>
-    </GestureHandlerRootView>
+    <WebView
+      ref={webview}
+      injectedJavaScriptBeforeContentLoaded={passErrorToRN}
+      injectedJavaScript={osmd_min_str}
+      setBuiltInZoomControls={false}
+      source={{
+        html: '<body><div id="osmdContainer"/></div></body>',
+      }}
+      containerStyle={style ?? styles.container}
+      onShouldStartLoadWithRequest={() => {
+        /** stop any navigation attempt inside the webview - we only load our own html canvas */
+        return false;
+      }}
+      onLoad={() => {
+        webview.current?.injectJavaScript(initOSMD);
+      }}
+      onError={(syntheticEvent) => {
+        const { nativeEvent } = syntheticEvent;
+        throw nativeEvent;
+      }}
+      onMessage={(event) => {
+        handleMessage(event.nativeEvent.data);
+      }}
+    />
   );
 });
 

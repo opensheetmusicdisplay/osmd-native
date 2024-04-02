@@ -15,12 +15,6 @@ var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay('osmdContainer');
 osmd.autoResizeEnabled = false;
 window.ReactNativeWebView.postMessage(JSON.stringify({ event: 'onInit', version: osmd.version }));
 window.ReactNativeWebView.postMessage(JSON.stringify({ event: 'ReactNativeWebview', ReactNativeWebView }));
-window.gestureChange = function (event) {
-  window.ReactNativeWebView.postMessage(JSON.stringify({ event: 'gestureChange', event }));
-};
-window.onresize = function (event) {
-  window.ReactNativeWebView.postMessage(JSON.stringify({ event: 'onresize', event }));
-};
 osmd.initPlaybackManager = function () {
   var timingSource = new opensheetmusicdisplay.LinearTimingSource();
   var playbackManager = new opensheetmusicdisplay.PlaybackManager(timingSource, undefined, new opensheetmusicdisplay.BasicAudioPlayer(), undefined);
