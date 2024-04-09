@@ -57,14 +57,14 @@ Some usage scenario examples:
 
 https://github.com/opensheetmusicdisplay/osmd-native/assets/1510491/891dceb7-41cc-43fd-a850-e516b3c03428
 
-#### Setting custom options
-```js
-// @todo
-```
 #### Changing cursor color
-```js
-// @todo
-```
+
+https://github.com/opensheetmusicdisplay/osmd-native/assets/1510491/ff4fd2df-46f8-4ccb-a359-19f1dc7cc8cb
+
+#### Zoom In/Out
+
+https://github.com/opensheetmusicdisplay/osmd-native/assets/1510491/72b55c14-1213-45a0-8a9d-2c701bad73ac
+
 ## Development
 
 ### Setup
