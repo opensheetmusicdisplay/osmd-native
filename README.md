@@ -5,8 +5,10 @@ Currently supports:
 - setting OSMDOptions via props
 - setting a musicXML string or URL via props
 - playing audio & controlling playback
+- zoom in / out
 
-![Screenshot](screenshot.jpg)
+![Screenshot](screenshot_1.jpg)
+![Screenshot](screenshot_2.jpg)
 
 ## Table of contents
 * [Installation](#installation)
@@ -52,9 +54,7 @@ See `./example` for an example app using this library, you can run it by running
 Some usage scenario examples:
 
 #### Controlling audio playback
-```js
-// @todo
-```
+![](video_audio_playback.mp4)
 #### Setting custom options
 ```js
 // @todo
@@ -101,6 +101,7 @@ With that setup, the react native library is defined via `index.tsx` -  it expor
 
 #### Component Props
 ```typescript
+/** Defines the properties of the OSMD react component */
 export interface OSMDProps {
   /** The music document to render.
    *  It needs to either be a URL to a MusicXML file or
@@ -117,8 +118,9 @@ export interface OSMDProps {
   onRender?: () => void;
 }
 ```
-#### Component Ref Methods
+#### Component Interface
 ```typescript
+/** Defines the interface of the OSMD object */
 export interface OSMDRef {
   /** starts audio playback */
   play: () => void;
@@ -128,6 +130,8 @@ export interface OSMDRef {
   stop: () => void;
   /** sets the osmd cursor color */
   setCursorColor: (color: string) => void;
+  /** sets the zoom scale */
+  setZoom: (scale: number) => void;
 }
 ```
 

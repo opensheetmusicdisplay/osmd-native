@@ -14,7 +14,6 @@ export const initOSMD = `
 var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay('osmdContainer');
 osmd.autoResizeEnabled = false;
 window.ReactNativeWebView.postMessage(JSON.stringify({ event: 'onInit', version: osmd.version }));
-window.ReactNativeWebView.postMessage(JSON.stringify({ event: 'ReactNativeWebview', ReactNativeWebView }));
 osmd.initPlaybackManager = function () {
   var timingSource = new opensheetmusicdisplay.LinearTimingSource();
   var playbackManager = new opensheetmusicdisplay.PlaybackManager(timingSource, undefined, new opensheetmusicdisplay.BasicAudioPlayer(), undefined);

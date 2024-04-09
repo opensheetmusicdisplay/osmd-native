@@ -16,6 +16,7 @@ import {
   setZoom,
 } from './injection/injection_scripts';
 
+/** Defines the interface of the OSMD object */
 export interface OSMDRef {
   /** starts audio playback */
   play: () => void;
@@ -29,6 +30,7 @@ export interface OSMDRef {
   setZoom: (scale: number) => void;
 }
 
+/** Defines the properties of the OSMD react component */
 export interface OSMDProps {
   /** The music document to render.
    *  It needs to either be a URL to a MusicXML file or
@@ -45,6 +47,7 @@ export interface OSMDProps {
   onRender?: () => void;
 }
 
+/** exports the mountable OSMDView React component */
 export const OSMDView = forwardRef<OSMDRef, OSMDProps>(function OSMDView(
   { musicXML, options, style, onRender }: OSMDProps,
   ref
@@ -86,6 +89,9 @@ export const OSMDView = forwardRef<OSMDRef, OSMDProps>(function OSMDView(
     }
   };
 
+  /**
+    implementation for OSMDRef interface
+   */
   useImperativeHandle(
     ref,
     () => {
