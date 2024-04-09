@@ -54,7 +54,9 @@ See `./example` for an example app using this library, you can run it by running
 Some usage scenario examples:
 
 #### Controlling audio playback
-![](video_audio_playback.mp4)
+
+https://github.com/opensheetmusicdisplay/osmd-native/assets/1510491/891dceb7-41cc-43fd-a850-e516b3c03428
+
 #### Setting custom options
 ```js
 // @todo
