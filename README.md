@@ -57,13 +57,40 @@ Some usage scenario examples:
 
 https://github.com/opensheetmusicdisplay/osmd-native/assets/1510491/891dceb7-41cc-43fd-a850-e516b3c03428
 
+Audio playback can be controlled via play / pause / stop methods on the `OSMDView` ref:  
+
+```jsx
+  const osmd = useRef<OSMDRef | null>(null);
+  // ...
+
+  <OSMDView
+    ref={osmd}
+    options={options}
+    musicXML={musicXML}
+  />
+  // ...
+
+  osmd.current?.play();   // start playback
+  osmd.current?.pause();  // pause playback at current position
+  osmd.current?.stop();   // stop playback and reset to beginning
+```
 #### Changing cursor color
 
 https://github.com/opensheetmusicdisplay/osmd-native/assets/1510491/ff4fd2df-46f8-4ccb-a359-19f1dc7cc8cb
 
+Cursor color can be set  on the `OSMDView` ref directly:
+```jsx
+osmd.current?.setCursorColor('#f00');
+```
+
 #### Zoom In/Out
 
 https://github.com/opensheetmusicdisplay/osmd-native/assets/1510491/72b55c14-1213-45a0-8a9d-2c701bad73ac
+
+Zoom scale gan be set on the `OSMDView` ref (default is `1.0`):
+```jsx
+osmd.current?.setZoom(1.1);
+```
 
 ## Development
 
