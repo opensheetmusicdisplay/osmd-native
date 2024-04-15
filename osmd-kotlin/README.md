@@ -51,7 +51,7 @@ Some usage scenario examples:
 
 #### Controlling audio playback
 
-// video
+https://github.com/opensheetmusicdisplay/osmd-native/assets/1510491/fcd7c691-bb7c-45bb-8e73-b5194f0f6896
 
 Audio playback can be controlled via play / pause / stop methods on the `osmd` instance:  
 
@@ -65,7 +65,7 @@ Audio playback can be controlled via play / pause / stop methods on the `osmd` i
 ```
 #### Changing cursor color
 
-// video
+https://github.com/opensheetmusicdisplay/osmd-native/assets/1510491/9aebd003-2556-462e-bbe3-3f5f669b9b76
 
 Cursor color can be set  on the `osmd` instance:
 ```kotlin
@@ -74,7 +74,7 @@ osmd.setCursorColor('#f00')
 
 #### Zoom In/Out
 
-// video
+https://github.com/opensheetmusicdisplay/osmd-native/assets/1510491/09cd65a3-d884-431e-8287-219421ab76ab
 
 Zoom scale gan be set on the `osmd` object (default is `1.0`):
 ```kotlin
