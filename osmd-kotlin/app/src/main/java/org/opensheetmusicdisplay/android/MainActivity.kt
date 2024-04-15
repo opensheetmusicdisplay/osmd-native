@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
             "Abide (MXL)" to "https://appassets.androidplatform.net/assets/AbideWithMe.mxl",
         )
 
-        // osmd object controlling playback, zoom & cursor
+        // osmd object controlling playback, zoom & cursor and exposing OSMDView
         val osmd = OSMD()
 
         // set any options supported by OSMD here
