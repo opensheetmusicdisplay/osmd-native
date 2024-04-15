@@ -98,9 +98,9 @@ The project will include both the example `app` and the `osmd-kotlin` lib, which
 ### Structure
 The project directory has the following structure:
 ```
-[root]                      (root project directory)
- ├─ app           (kotlin example app source) 
- ├─ [/../] osmd-kotlin                   (lib source) 
+[root]                   (root project directory)
+ ├─ app                  (kotlin example app source) 
+ ├─ [/../] osmd-kotlin   (lib source) 
  ├── assets              (opensheetmusicdisplay.min.js & init scripts/html) 
 ```
 The architecture of this lib can be summarized like this:
