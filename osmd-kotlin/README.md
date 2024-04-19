@@ -1,9 +1,9 @@
-# react-native-osmd
+# osmd-kotlin
 
 OpenSheetMusicDisplay for Kotlin / Compose
 Currently supports:
 - setting OSMDOptions via props
-- setting a musicXML string or URL via props
+- loading a local or remote music xml file
 - playing audio & controlling playback
 - zoom in / out
 
@@ -13,7 +13,7 @@ Currently supports:
 ## Table of contents
 * [Installation](#installation)
 * [Usage](#usage)
-* [Example](#example)
+* [Examples](#examples)
 * [Development](#development)
 * [Setup](#setup)
 * [Structure](#structure)
@@ -76,7 +76,7 @@ osmd.setCursorColor('#f00')
 
 https://github.com/opensheetmusicdisplay/osmd-native/assets/1510491/09cd65a3-d884-431e-8287-219421ab76ab
 
-Zoom scale gan be set on the `osmd` object (default is `1.0`):
+Zoom scale can be set on the `osmd` object (default is `1.0`):
 ```kotlin
 osmd.setZoom(1.1)
 ```
@@ -104,7 +104,7 @@ The project directory has the following structure:
  ├── assets              (opensheetmusicdisplay.min.js & init scripts/html) 
 ```
 The architecture of this lib can be summarized like this:
-- An [OSMD build](https://github.com/opensheetmusicdisplay/opensheetmusicdisplay) is encapsulated inside a skeleton  webview that loads nothing but an empty html page with a single container inside to load OSMD into
+- An [OSMD build](https://github.com/opensheetmusicdisplay/opensheetmusicdisplay) is encapsulated inside a skeleton webview that loads nothing but an empty html page with a single container inside to load OSMD into
 - The `InjectionScripts.kt` file contains js that can be passed to and launched inside the webview to load OSMD, set options, load & render a music sheet and control playback within Kotlin. These scripts essentially expose the actual OSMD functionality.
 
 With that setup, the kotlin library is defined via the `OSMD` class -  it exports functions for playback control, cursor & zoom settings and the composable `OSMDView` component which is the main view component that renders a given music xml.
