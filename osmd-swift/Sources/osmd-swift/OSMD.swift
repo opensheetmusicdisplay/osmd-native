@@ -10,13 +10,12 @@ import WebKit
 import SwiftUI
 import GCDWebServer
 
-@available(iOS 13.0, *)
-class OSMD {
+public class OSMD {
     var osmdWebView: WKWebView!
     var webServer: GCDWebServer?
     var osmdWebViewRepresentable: WebViewRepresentable?
     
-    init(){
+    public init(){
         osmdWebView = WKWebView()
         // Create a GCDWebServer instance
         webServer = GCDWebServer()
@@ -46,39 +45,38 @@ class OSMD {
         // Start the web server
         webServer?.start(withPort: 8080, bonjourName: "GCD Web Server")
         print("Local server running on port \(webServer?.port ?? 8080)")
-        
     }
     
     /** starts audio playback */
-    func play() {
+    public func play() {
         if let webView = osmdWebView {
             webView.evaluateJavaScript(startPlayback, completionHandler: nil)
         }
     }
     
     /** pauses audio playback at the current position */
-    func pause() {
+    public func pause() {
         if let webView = osmdWebView {
             webView.evaluateJavaScript(pausePlayback, completionHandler: nil)
         }
     }
     
     /** stops audio playback and resets to initial position */
-    func stop() {
+    public func stop() {
         if let webView = osmdWebView {
             webView.evaluateJavaScript(stopPlayback, completionHandler: nil)
         }
     }
     
     /** sets the osmd cursor color */
-    func setCursorColor(color: String) {
+    public func setCursorColor(color: String) {
         if let webView = osmdWebView {
             webView.evaluateJavaScript(setCursor(color: color), completionHandler: nil)
         }
     }
     
     /** sets the zoom scale */
-    func setZoom(scale: Float) {
+    public func setZoom(scale: Float) {
         if let webView = osmdWebView {
             webView.evaluateJavaScript(setZoomScale(zoom: scale), completionHandler: nil)
         }
@@ -92,7 +90,7 @@ class OSMD {
      * @param onRender optional function callback to be after render
      */
     @available(iOS 13.0, *)
-    func OSMDView(musicXML: String, options: [String: Any]? = nil, onRender: (() -> Void)? = nil) -> some View {
+    public func OSMDView(musicXML: String, options: [String: Any]? = nil, onRender: (() -> Void)? = nil) -> some View {
         if (osmdWebViewRepresentable != nil){
             if(musicXML == osmdWebViewRepresentable?.musicXML){
                 return osmdWebViewRepresentable
@@ -122,10 +120,20 @@ class OSMD {
         }
         
         func updateUIView(_ webView: WKWebView, context: Context) {
-            if let htmlPath = Bundle.main.path(forResource: "assets/index", ofType: "html") {
+            guard let resourceUrl = Bundle.module.url(
+              forResource: "index",
+              withExtension: "html"
+            ) else {
+                print("Index file not found")
+                return
+            }
+
+            webView.loadFileURL(resourceUrl, allowingReadAccessTo: resourceUrl.deletingLastPathComponent())
+            
+            /*if let htmlPath = Bundle.main.path(forResource: "Resources/index", ofType: "html") {
                 let htmlURL = URL(fileURLWithPath: htmlPath)
                 webView.loadFileURL(htmlURL, allowingReadAccessTo: htmlURL.deletingLastPathComponent())
-            }
+            }*/
         }
         
         func makeCoordinator() -> Coordinator {
