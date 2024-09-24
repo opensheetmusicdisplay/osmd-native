@@ -10,5 +10,5 @@ This repo contains sources for three platform libraries:
 |---	|---	|
 | ![Screenshot](react-native-osmd/screenshot_1.jpg) <p align="center">React Native</p> | ![Screenshot](react-native-osmd/screenshot_2.jpg) <p align="center">React Native</p> |
 |---	|---	|
-| ![Screenshot](osmd-swift/screenshot_1.jpg) <p align="center">Swift</p> | ![Screenshot](osmd-swift/screenshot_2.jpg) <p align="center">Swift</p> |
+| ![Screenshot](osmd-swift/screenshot_1.png) <p align="center">Swift</p> | ![Screenshot](osmd-swift/screenshot_2.png) <p align="center">Swift</p> |
 
