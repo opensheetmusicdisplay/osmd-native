@@ -4,6 +4,7 @@ OpenSheetMusicDisplay for React Native & Kotlin / Compose
 This repo contains sources for two platform libraries:
 - [osmd-kotlin](osmd-kotlin/) for the Kotlin / Compose version
 - [react-native-osmd](react-native-osmd/) for the React Native version
+- [osmd-swift](osmd-swift/) for the Swift / iOS Version
 
 | ![Screenshot](osmd-kotlin/screenshot_1.jpg) <p align="center">Kotlin</p> | ![Screenshot](osmd-kotlin/screenshot_2.jpg) <p align="center">Kotlin</p> |
 |---	|---	|
